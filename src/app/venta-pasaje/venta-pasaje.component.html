@@ -1,0 +1,86 @@
+<body class="container-fluid">
+    <br>
+    <div class="container">
+        <form>
+            <div class="mb-3">
+              <label for="dni" class="form-label">DNI</label>
+              <input type="text" class="form-control" id="dni" name="dni" [(ngModel)]="pasaje.dni" required>
+            </div>
+            <div class="row g-3">
+                <div class="col-md">
+                    <div class="form-floating">
+                      <select class="form-select" id="categoria" name="categoria" (ngModelChange)="cambio()" [(ngModel)]="pasaje.categoria">
+                        <option value="M" selected>Menor</option>
+                        <option value="A">Adulto</option>
+                        <option value="J">Jubilado</option>
+                      </select>
+                      <label for="categoria">Categoría</label>
+                    </div>
+                </div>
+                <div class="col-md">
+                  <div class="form-floating">
+                    <input type="number" class="form-control" id="precio" name="precio" (ngModelChange)="cambio()" [(ngModel)]="pasaje.precio">
+                    <label for="precio">Ingrese Precio</label>
+                  </div>
+                </div>
+                <div class="col-md">
+                    <div class="form-floating">
+                      <input type="number" class="form-control" id="precio_con_descuento" disabled>
+                      <label for="precio_con_descuento">Precio con descuento {{pasaje.precio_con_descuento}}</label>
+                    </div>
+                  </div>      
+              </div>
+              <br>
+              <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                <button class="btn btn-primary me-md-2" type="button" (click)="cambio()" (click)="registrarPasaje()">Registrar</button>
+                <button class="btn btn-light" type="button" (click)="limpiarTodo()">Limpiar</button>
+              </div>
+        </form>      
+    </div>
+    <br>
+    <div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">DNI</th>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Categoría</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col">% Descuento</th>
+                    <th scope="col">Precio con descuento</th>
+                </tr>
+            </thead>
+            <tbody class="table-group-divider">
+                <tr *ngFor="let pas of pasajes">
+                    <td>{{pas.dni}}</td>
+                    <td>{{pas.fecha}}</td>
+                    <td>{{pas.categoria}}</td>
+                    <td>${{pas.precio}}</td>
+                    <td>{{pas.porcentaje}}</td>
+                    <td>${{pas.precio_con_descuento}}</td>
+                </tr>
+            </tbody>
+      </table>
+      <br>
+      <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Cantidad de menores</th>
+                <th scope="col">Cantidad de adultos</th>
+                <th scope="col">Cantidad de jubilados</th>
+                <th scope="col">Total</th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            <tr>
+                <td>{{cant_menor}}</td>
+                <td>{{cant_adulto}}</td>
+                <td>{{cant_jub}}</td>
+                <td>{{cant_total}}</td>
+            </tr>
+        </tbody>
+  </table>
+    </div>   
+</body>
+
+
